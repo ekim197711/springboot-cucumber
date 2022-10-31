@@ -2,7 +2,9 @@ package com.example.springbootcucumber.cucumberglue;
 
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import io.cucumber.spring.CucumberContextConfiguration;
 import org.junit.jupiter.api.Assertions;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
@@ -11,7 +13,8 @@ import org.springframework.web.client.RestTemplate;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 
-
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@CucumberContextConfiguration
 public class CucumberMySteps {
 
     @LocalServerPort

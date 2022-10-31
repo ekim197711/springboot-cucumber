@@ -5,8 +5,9 @@ import io.cucumber.junit.CucumberOptions;
 import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
-@CucumberOptions(features = "classpath:features/",
+@CucumberOptions(
+        features = {"src/test/resources/features"},
+        plugin = {"pretty"},
         glue = {"com.example.springbootcucumber.cucumberglue"})
-
-public class CucumberIntegrationTest {
+public class CucumberTestRunner {
 }
