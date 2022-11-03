@@ -1,5 +1,9 @@
 package com.example.springbootcucumber.cucumberglue;
 
+import com.example.springbootcucumber.SpaceShipDto;
+import com.example.springbootcucumber.SpaceShipDtoList;
+import io.cucumber.datatable.DataTable;
+import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.cucumber.spring.CucumberContextConfiguration;
@@ -10,6 +14,9 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
+
+import java.util.List;
+import java.util.Map;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 
@@ -50,4 +57,41 @@ public class CucumberMySteps {
 //        assertThat("Returned string is " + expected,
 //                expected.equalsIgnoreCase(lastResponse.getBody()));
     }
+
+    private List<Map<String, String>> ships;
+    RestTemplate restTemplate = new RestTemplate();
+
+    @Given("We have gaffa taped the following spaceships together")
+    public void weHaveGaffaTapedTheFollowingSpaceshipsTogether(DataTable shipsGaffaTaped) {
+        List<Map<String, String>> maps = shipsGaffaTaped.asMaps();
+        System.out.println(shipsGaffaTaped);
+        System.out.println(maps);
+        ships = maps;
+    }
+
+
+    @When("send ships to rest controller")
+    public void sendShipsToRestController() {
+        String url = "http://localhost:" + port + "/ship/";
+        ships.forEach(ship -> {
+
+                    SpaceShipDto spaceShipDto = restTemplate.postForObject(
+                            url, ship, SpaceShipDto.class);
+                    System.out.println("Response from post " + spaceShipDto);
+                }
+        );
+    }
+
+    @Then("all ships should now have an id")
+    public void shipsShouldHaveIds(DataTable expectedShips) {
+        String url = "http://localhost:" + port + "/ship/";
+        SpaceShipDtoList shipsFromDb = restTemplate.getForObject(url, SpaceShipDtoList.class);
+        shipsFromDb.getShips().forEach(shipFromDb -> Assertions.assertNotNull(shipFromDb.id()));
+        List<Map<String, String>> maps = expectedShips.asMaps();
+        for (Map<String, String> shiprow : maps) {
+            boolean foundByName = shipsFromDb.getShips().stream().anyMatch(ship -> ship.shipName().equals(shiprow.get("shipName")));
+            Assertions.assertTrue(foundByName, shiprow.get("shipName") + " was not found in db");
+        }
+    }
+
 }
