@@ -23,10 +23,13 @@ import static org.hamcrest.MatcherAssert.assertThat;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @CucumberContextConfiguration
 public class CucumberMySteps {
+    public class RunCucumberTest {
+    }
 
     @LocalServerPort
     String port;
     ResponseEntity<String> lastResponse;
+
 
     @When("the client calls endpoint {string}")
     public void whenClientCalls(String url) {
