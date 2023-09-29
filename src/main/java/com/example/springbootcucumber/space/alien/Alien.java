@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.math.BigDecimal;
 
 @Data
 @Entity
@@ -20,5 +21,6 @@ public class Alien {
     private String type;
     private String name;
     private int weight;
+    private BigDecimal weightPrecise;
     private int height;
 }
