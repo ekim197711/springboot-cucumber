@@ -1,6 +1,7 @@
 package com.example.springbootcucumber.space.alien;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -14,6 +15,7 @@ import java.math.BigDecimal;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class Alien {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

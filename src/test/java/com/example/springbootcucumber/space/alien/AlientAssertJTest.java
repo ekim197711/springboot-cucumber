@@ -12,8 +12,9 @@ public class AlientAssertJTest {
     @Test
     @DisplayName("Test on aliens")
     void trySomething() {
+        Alien mike = new Alien(null, "Human", "Mike", 123, BigDecimal.ZERO, 122);
         List<Alien> aliens = List.of(
-                new Alien(null, "Human", "Mike", 123, BigDecimal.ZERO, 122),
+                mike,
                 new Alien(null, "Wookie", "Chewie", 1232, BigDecimal.ZERO, 1232),
                 new Alien(null, "Squid", "Susan", 12, BigDecimal.ZERO, 12),
                 new Alien(null, "Droid", "R2D2", 1223, BigDecimal.ZERO, 100),
@@ -23,7 +24,9 @@ public class AlientAssertJTest {
         Assertions.assertThat(aliens)
                 .as("Test if the aliens have duplicates")
                 .withFailMessage("Hey don't use duplicates dummy. List count " + aliens.size())
-                .doesNotHaveDuplicates();
+                .doesNotHaveDuplicates()
+                .hasSize(5)
+                .contains(mike);
 
         Alien alien = aliens.get(0);
         Assertions.assertThat(alien)
