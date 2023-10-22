@@ -10,10 +10,12 @@ class WookieInListLogicTest {
             Alien.builder()
                     .type("Wookie")
                     .name("Mike")
-                    .build(), Alien.builder()
+                    .build(),
+            Alien.builder()
                     .type("Wookie")
                     .name("Brian")
-                    .build(), Alien.builder()
+                    .build(),
+            Alien.builder()
                     .type("Ewok")
                     .name("Paulina")
                     .build(),

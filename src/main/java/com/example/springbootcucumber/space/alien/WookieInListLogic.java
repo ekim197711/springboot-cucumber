@@ -21,7 +21,9 @@ public class WookieInListLogic {
     }
 
     public boolean containsWookie() {
-        return aliens.stream().map(WookieLogic::new).anyMatch(WookieLogic::isWookie);
+        return aliens.stream()
+                .map(WookieLogic::new)
+                .anyMatch(WookieLogic::isWookie);
     }
 
 }
