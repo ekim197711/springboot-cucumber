@@ -26,7 +26,7 @@ class AlienDefaultDataTest {
     void weightSumReduce() {
         List<Alien> all = alienRepository.findAll();
 
-        BigDecimal precise = all.stream().map(Alien::getWeightPrecise).reduce(BigDecimal.ZERO, BigDecimal::add);
+        BigDecimal precise = all.stream().map(Alien::getRunSpeed).reduce(BigDecimal.ZERO, BigDecimal::add);
         Assertions.assertThat(precise).isEqualTo(new BigDecimal("658.27"));
         System.out.printf("Sum value %s", precise);
     }

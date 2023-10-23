@@ -23,6 +23,6 @@ public class Alien {
     private String type;
     private String name;
     private int weight;
-    private BigDecimal weightPrecise;
+    private BigDecimal runSpeed;
     private int height;
 }
