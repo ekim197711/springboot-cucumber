@@ -6,6 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -33,5 +34,13 @@ public class AlienService {
     public void terminateAllAliens() {
         log.info("Delete all aliens");
         alienRepository.deleteAll();
+    }
+
+    public List<Alien> aliensOfType(String type) throws AlienException {
+        List<Alien> alienList = alienRepository.aliensOfType(type);
+        if (alienList.isEmpty()) {
+            throw new AlienException(AlienServiceErrorMessage.ALIEN_NO_TYPE.oneArgument(type));
+        }
+        return alienList;
     }
 }
