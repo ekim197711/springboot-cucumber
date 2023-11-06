@@ -17,15 +17,13 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @CucumberContextConfiguration
 public class CucumberMySteps {
-    public class RunCucumberTest {
-    }
-
     @LocalServerPort
     String port;
     ResponseEntity<String> lastResponse;
@@ -57,12 +55,10 @@ public class CucumberMySteps {
     @Then("returned string should be {string}")
     public void thenStringIs(String expected) {
         Assertions.assertEquals(expected, lastResponse.getBody());
-//        assertThat("Returned string is " + expected,
-//                expected.equalsIgnoreCase(lastResponse.getBody()));
     }
 
     private List<Map<String, String>> ships;
-    RestTemplate restTemplate = new RestTemplate();
+    final RestTemplate restTemplate = new RestTemplate();
 
     @Given("We have gaffa taped the following spaceships together")
     public void weHaveGaffaTapedTheFollowingSpaceshipsTogether(DataTable shipsGaffaTaped) {
@@ -89,10 +85,11 @@ public class CucumberMySteps {
     public void shipsShouldHaveIds(DataTable expectedShips) {
         String url = "http://localhost:" + port + "/ship/";
         SpaceShipDtoList shipsFromDb = restTemplate.getForObject(url, SpaceShipDtoList.class);
-        shipsFromDb.getShips().forEach(shipFromDb -> Assertions.assertNotNull(shipFromDb.id()));
+        Objects.requireNonNull(shipsFromDb).getShips().forEach(shipFromDb -> Assertions.assertNotNull(shipFromDb.id()));
         List<Map<String, String>> maps = expectedShips.asMaps();
         for (Map<String, String> shiprow : maps) {
-            boolean foundByName = shipsFromDb.getShips().stream().anyMatch(ship -> ship.shipName().equals(shiprow.get("shipName")));
+            boolean foundByName = shipsFromDb.getShips().stream()
+                    .anyMatch(ship -> ship.shipName().equals(shiprow.get("shipName")));
             Assertions.assertTrue(foundByName, shiprow.get("shipName") + " was not found in db");
         }
     }

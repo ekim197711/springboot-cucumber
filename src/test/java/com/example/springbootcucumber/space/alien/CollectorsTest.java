@@ -4,19 +4,18 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
 class CollectorsTest {
-    Alien mike = Alien.builder()
+    final Alien mike = Alien.builder()
             .type("Wookie")
             .name("Mike")
             .height(12)
             .weight(120)
             .build();
-    Alien rancor = Alien.builder()
+    final Alien rancor = Alien.builder()
             .type("Rancor")
             .name("Poul")
             .height(289)
@@ -24,13 +23,13 @@ class CollectorsTest {
             .build();
 
 
-    Alien brian = Alien.builder()
+    final Alien brian = Alien.builder()
             .type("Wookie")
             .name("Brian")
             .height(14)
             .weight(124)
             .build();
-    List<Alien> aliens = List.of(
+    final List<Alien> aliens = List.of(
             mike,
             brian,
             Alien.builder()
@@ -45,8 +44,7 @@ class CollectorsTest {
     @Test
     @DisplayName("Collectors test")
     void collectorsTest() {
-        Integer stackedOnTopOfEachOther = aliens.stream()
-                .collect(Collectors.summingInt(Alien::getHeight));
+        Integer stackedOnTopOfEachOther = aliens.stream().mapToInt(Alien::getHeight).sum();
 
         Integer stackedSecond = aliens.stream().mapToInt(Alien::getHeight).sum();
 
@@ -99,13 +97,4 @@ class CollectorsTest {
 
         collect.forEach((key, value) -> System.out.println(key + " - " + value));
     }
-
-    @Test
-    @DisplayName("Collectors other collections")
-    void collectorsCollectionTest() {
-        aliens.stream().collect(Collectors.toCollection(LinkedList::new));
-
-    }
-
-
 }

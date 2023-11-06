@@ -6,21 +6,22 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
+@SuppressWarnings("unused")
 public interface AlienRepository extends JpaRepository<Alien, Long> {
 
     @Query("""
-                    SELECT COUNT (T.id)  
+                    SELECT COUNT (T.id)
                     FROM Alien T
-                    WHERE 
+                    WHERE
                     T.type = :type
             """)
     int countWithType(@Param("type") String type);
 
 
     @Query("""
-                                SELECT A 
-                                FROM Alien A 
-                                WHERE 
+                                SELECT A
+                                FROM Alien A
+                                WHERE
                                 A.type = :type
             """
     )

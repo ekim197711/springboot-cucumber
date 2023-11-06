@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.util.List;
 
+@SuppressWarnings({"UnusedReturnValue", "unused"})
 @Service
 @RequiredArgsConstructor
 @Slf4j

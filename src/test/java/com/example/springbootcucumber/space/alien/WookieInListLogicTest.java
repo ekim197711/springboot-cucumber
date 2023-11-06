@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 class WookieInListLogicTest {
-    List<Alien> aliens = List.of(
+    final List<Alien> aliens = List.of(
             Alien.builder()
                     .type("Wookie")
                     .name("Mike")
