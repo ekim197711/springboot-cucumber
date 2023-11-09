@@ -20,6 +20,7 @@ class AlienDefaultDataTest {
         List<Alien> all = alienRepository.findAll();
         Integer reducedValue = all.stream().mapToInt(Alien::getWeight).sum();
         System.out.printf("Sum value %s", reducedValue);
+        Assertions.assertThat(reducedValue).isNotNull();
     }
 
     @Test
@@ -40,5 +41,6 @@ class AlienDefaultDataTest {
             summedWeight += alien.getWeight();
         }
         System.out.printf("Summed weight = %s limit %s%n", summedWeight, limit);
+        Assertions.assertThat(summedWeight).isPositive();
     }
 }

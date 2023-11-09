@@ -8,7 +8,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 @SuppressWarnings("ResultOfMethodCallIgnored")
-public class AlientAssertJTest {
+class AlientAssertJTest {
 
     @Test
     @DisplayName("Test on aliens")
@@ -32,7 +32,9 @@ public class AlientAssertJTest {
         Alien alien = aliens.get(0);
         Assertions.assertThat(alien)
                 .isIn(aliens)
-                .satisfies(a -> a.getName().equalsIgnoreCase("mike"));
+                .satisfies(a ->
+                        Assertions.assertThat(a.getName()).isEqualToIgnoringCase("mike")
+                );
 
         Assertions.assertThat(alien.getType())
                 .describedAs("Check this alien " + alien)

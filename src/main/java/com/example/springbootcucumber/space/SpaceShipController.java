@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/ship")
@@ -35,7 +34,7 @@ public class SpaceShipController {
                         all.stream().map(spaceShipEntity -> new SpaceShipDto(spaceShipEntity.getId(),
                                 spaceShipEntity.getShipName(),
                                 spaceShipEntity.getFuel(),
-                                spaceShipEntity.getMaxSpeed())).collect(Collectors.toList())
+                                spaceShipEntity.getMaxSpeed())).toList()
                 )
                 .build();
     }
