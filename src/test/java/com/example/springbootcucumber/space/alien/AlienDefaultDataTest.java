@@ -43,4 +43,16 @@ class AlienDefaultDataTest {
         System.out.printf("Summed weight = %s limit %s%n", summedWeight, limit);
         Assertions.assertThat(summedWeight).isPositive();
     }
+
+    @Test
+    void testCreateDefaultAliens() {
+        Alien susan = alienRepository
+                .findAll()
+                .stream()
+                .filter(a -> a.getName().equalsIgnoreCase("Susan"))
+                .findFirst().orElseThrow();
+        System.out.println("Susan: " + susan);
+        Assertions.assertThat(susan.getName()).isEqualToIgnoringCase("Susan");
+        Assertions.assertThat(susan.getWeight()).isEqualTo(75);
+    }
 }
