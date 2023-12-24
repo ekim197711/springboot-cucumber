@@ -23,13 +23,7 @@ public class OneOfEacthTest {
         Map<String, Alien> collect = alienRepository.findAll()
                 .stream()
                 .collect(
-                        Collectors.toMap(this::key, a -> a,
-                                (a1, a2) -> {
-                                    if (a1.getWeight() < a2.getWeight())
-                                        return a1;
-                                    else
-                                        return a2;
-                                })
+                        Collectors.toMap(this::key, a -> a, (a1, a2) -> a1)
                 );
         System.out.println(collect);
         collect.entrySet().forEach(
