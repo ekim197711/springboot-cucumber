@@ -2,6 +2,7 @@ package com.example.springbootcucumber.space.alien.unique;
 
 import com.example.springbootcucumber.space.alien.Alien;
 import com.example.springbootcucumber.space.alien.AlienRepository;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -10,12 +11,12 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE)
-public class OneOfEacthTest {
+class OneOfEachTest {
     @Autowired
     AlienRepository alienRepository;
 
     private String key(Alien alien) {
-        return "type:" + alien.getType() + "_name:" + alien.getName();
+        return "type:" + alien.getType() + "_name:" + alien.getFullName();
     }
 
     @Test
@@ -26,8 +27,11 @@ public class OneOfEacthTest {
                         Collectors.toMap(this::key, a -> a, (a1, a2) -> a1)
                 );
         System.out.println(collect);
-        collect.entrySet().forEach(
-                es -> System.out.println("Key: " + es.getKey() + ", Value: " + es.getValue())
-        );
+        collect.forEach((key, value) -> {
+            Assertions.assertThat(key).isNotNull();
+            Assertions.assertThat(value).isNotNull();
+            System.out.println("Key: " + key + ", Value: " + value);
+        });
+
     }
 }

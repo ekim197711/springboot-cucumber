@@ -7,8 +7,7 @@ import org.junit.jupiter.api.Test;
 import java.math.BigDecimal;
 import java.util.List;
 
-@SuppressWarnings("ResultOfMethodCallIgnored")
-class AlientAssertJTest {
+class AlienAssertJTest {
 
     @Test
     @DisplayName("Test on aliens")
@@ -33,7 +32,7 @@ class AlientAssertJTest {
         Assertions.assertThat(alien)
                 .isIn(aliens)
                 .satisfies(a ->
-                        Assertions.assertThat(a.getName()).isEqualToIgnoringCase("mike")
+                        Assertions.assertThat(a.getFullName()).isEqualToIgnoringCase("mike")
                 );
 
         Assertions.assertThat(alien.getType())

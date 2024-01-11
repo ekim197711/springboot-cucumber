@@ -15,6 +15,7 @@ class AlienControllerTest {
     AlienController alienController;
 
     @Test
+    @SuppressWarnings("java:S2925")
     void createAlien() throws InterruptedException {
         for (int i = 0; i < 500; i++) {
             new Thread(() -> {
@@ -27,7 +28,7 @@ class AlienControllerTest {
                         .weight(200)
                         .height(100)
                         .type("Klingon")
-                        .name("Adam")
+                        .fullName("Adam")
                         .runSpeed(BigDecimal.TEN)
                         .build(), true);
                 Assertions.assertThat(alien.getWeight()).isEqualTo(205);
@@ -42,7 +43,7 @@ class AlienControllerTest {
                         .weight(200)
                         .height(100)
                         .type("Klingon")
-                        .name("Ole")
+                        .fullName("Ole")
                         .runSpeed(BigDecimal.TEN)
                         .build(), false);
                 Assertions.assertThat(alienOther.getWeight()).isEqualTo(200);

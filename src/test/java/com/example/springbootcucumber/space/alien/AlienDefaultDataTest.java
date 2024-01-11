@@ -49,10 +49,10 @@ class AlienDefaultDataTest {
         Alien susan = alienRepository
                 .findAll()
                 .stream()
-                .filter(a -> a.getName().equalsIgnoreCase("Susan"))
+                .filter(a -> a.getFullName().equalsIgnoreCase("Susan"))
                 .findFirst().orElseThrow();
         System.out.println("Susan: " + susan);
-        Assertions.assertThat(susan.getName()).isEqualToIgnoringCase("Susan");
+        Assertions.assertThat(susan.getFullName()).isEqualToIgnoringCase("Susan");
         Assertions.assertThat(susan.getWeight()).isEqualTo(75);
     }
 }

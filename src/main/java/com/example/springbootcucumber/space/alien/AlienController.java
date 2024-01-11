@@ -18,12 +18,12 @@ public class AlienController {
     }
 
     @PostMapping("/{enableWeightGain}")
-    Alien createAlien(Alien newAlien, @PathVariable("enableWeightGain") boolean enableWeightGain) {
+    @SuppressWarnings("java:S4684")
+    Alien createAlien(@RequestBody Alien newAlien, @PathVariable("enableWeightGain") boolean enableWeightGain) {
         if (enableWeightGain) {
             weightGainEnabledService.enableWeightGain();
         }
-        Alien save = alienRepository.save(newAlien);
-        return save;
+        return alienRepository.save(newAlien);
     }
 
 

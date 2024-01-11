@@ -4,7 +4,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class WeightGainEnabledService {
-    private ThreadLocal<Boolean> shouldAddWeight = ThreadLocal.withInitial(() -> false);
+    private final ThreadLocal<Boolean> shouldAddWeight = ThreadLocal.withInitial(() -> false);
 
     public void enableWeightGain() {
         shouldAddWeight.set(true);
@@ -12,5 +12,9 @@ public class WeightGainEnabledService {
 
     public boolean isEnabled() {
         return shouldAddWeight.get();
+    }
+
+    public void remove() {
+        shouldAddWeight.remove();
     }
 }

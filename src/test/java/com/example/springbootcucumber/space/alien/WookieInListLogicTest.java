@@ -9,19 +9,19 @@ class WookieInListLogicTest {
     final List<Alien> aliens = List.of(
             Alien.builder()
                     .type("Wookie")
-                    .name("Mike")
+                    .fullName("Mike")
                     .build(),
             Alien.builder()
                     .type("Wookie")
-                    .name("Brian")
+                    .fullName("Brian")
                     .build(),
             Alien.builder()
                     .type("Ewok")
-                    .name("Paulina")
+                    .fullName("Paulina")
                     .build(),
             Alien.builder()
                     .type("Rancor")
-                    .name("Poul")
+                    .fullName("Poul")
                     .build()
     );
 

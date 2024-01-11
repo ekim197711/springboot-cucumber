@@ -11,13 +11,13 @@ import java.util.stream.Collectors;
 class CollectorsTest {
     final Alien mike = Alien.builder()
             .type("Wookie")
-            .name("Mike")
+            .fullName("Mike")
             .height(12)
             .weight(120)
             .build();
     final Alien rancor = Alien.builder()
             .type("Rancor")
-            .name("Poul")
+            .fullName("Poul")
             .height(289)
             .weight(5000)
             .build();
@@ -25,7 +25,7 @@ class CollectorsTest {
 
     final Alien brian = Alien.builder()
             .type("Wookie")
-            .name("Brian")
+            .fullName("Brian")
             .height(14)
             .weight(124)
             .build();
@@ -34,7 +34,7 @@ class CollectorsTest {
             brian,
             Alien.builder()
                     .type("Ewok")
-                    .name("Paulina")
+                    .fullName("Paulina")
                     .height(4)
                     .weight(33)
                     .build(),
@@ -66,7 +66,7 @@ class CollectorsTest {
     @DisplayName("Collectors joining string")
     void collectorsJoiningTest() {
         String namesPutTogether = aliens.stream()
-                .map(Alien::getName)
+                .map(Alien::getFullName)
                 .collect(Collectors.joining(" - "));
         Assertions.assertThat(namesPutTogether)
                 .isEqualTo("Mike - Brian - Paulina - Poul");
@@ -85,8 +85,8 @@ class CollectorsTest {
     }
 
     @Test
-    @DisplayName("Collectors Partioning")
-    void collectorsPartionTest() {
+    @DisplayName("Collectors Partitioning")
+    void collectorsPartitioningByTest() {
         Map<Boolean, List<Alien>> collect = aliens.stream()
                 .collect(Collectors.partitioningBy(a -> mike.getWeight() > 100));
 
