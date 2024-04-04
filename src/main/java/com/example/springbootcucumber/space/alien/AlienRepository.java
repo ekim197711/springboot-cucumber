@@ -6,7 +6,7 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
-@SuppressWarnings("unused")
+
 public interface AlienRepository extends JpaRepository<Alien, Long> {
 
     @Query("""

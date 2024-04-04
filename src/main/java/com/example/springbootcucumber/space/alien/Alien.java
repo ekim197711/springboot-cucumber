@@ -1,15 +1,14 @@
 package com.example.springbootcucumber.space.alien;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
 
-@Data
+@Getter
+@Setter
+@ToString
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
@@ -24,6 +23,7 @@ public class Alien {
     private String fullName;
     private int weight;
     private BigDecimal runSpeed;
+    //    runSpeed
     private int height;
 
     public String beamUp(String something) {

@@ -13,6 +13,11 @@ class AlienAssertJTest {
     @DisplayName("Test on aliens")
     void trySomething() {
         Alien mike = new Alien(null, "Human", "Mike", 123, BigDecimal.ZERO, 122);
+
+        Alien mike1 = Alien.builder().fullName("Mike")
+                .weight(75)
+                .build();
+        
         List<Alien> aliens = List.of(
                 mike,
                 new Alien(null, "Wookie", "Chewie", 1232, BigDecimal.ZERO, 1232),
